@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue数据绑定</title>
+    <!-- 引入 vue，开发模式-->
+    <script type="text/javascript" src = "../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id = "root">
+        <!-- v-bind：修改 input 中的值，data 中 name 的值不会改变 -->
+        单向数据绑定：<input type="text" v-bind:value="name"><br/>
+        
+        <!-- v-model：修改 input 中的值，data 中 name 的值将会改变，同时改变 “单向数据绑定” 的输入框 -->
+        <!-- 注意：
+              1. v-model 只能应用于 表单类标签，即标签需要带有 value 这个属性
+              2. v-model:value 可以简写成 v-model
+        -->
+        双向数据绑定：<input type="text" v-model:value="name"><br/>
+        v-model简写：<input type="text" v-model="name"><br/>
+        
+    </div>
+    
+    <script type="text/javascript">
+        
+        const x = new Vue({
+            el: '#root',
+            data: {
+                name: "黄米饭"
+            }
+        })
+    </script>
+</body>
+</html>

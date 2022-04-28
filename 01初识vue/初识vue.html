@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识vue</title>
+    <!-- 引入 vue，开发模式-->
+    <script type="text/javascript" src = "../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id = "root">
+        <!-- vue 插值语法：{{xxx}}：xxx 需是 js表达式（生成一个可供显示的值） 或者 data中的键 -->
+        <h1>hello, {{username}}</h1>
+        <h2>hello, {{1+1}}</h2>
+        <h2>hello, {{Date.now()}}</h2>
+        <h2>hello, {{school.toUpperCase()}}</h2>
+    </div>
+    
+    <script type="text/javascript">
+        Vue.config.productionTip = false  // 设置为 false 以阻止 vue 在启动时生成生产提示
+        
+        // 创建 vue 实例。vue 实例 和 容器 之间是严格的 一对一 关系。
+        const x = new Vue({
+            el: '#root',    // el，指定当前 vue 对象为哪个容器提供服务。值 通常为 css选择器字符串
+            data: {
+                username: "杨睿",
+                school: "Beijing"
+            }    // data，以键值对的形式保存多种类型的数据。data 中的数据供该 vue对象 服务的容器使用
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>el与data的两种写法</title>
+    <!-- 引入 vue，开发模式-->
+    <script type="text/javascript" src = "../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id = "root">
+        <h1>hello, {{name}}</h1>
+    </div>
+    
+    <script type="text/javascript">
+        
+        const v = new Vue({
+            // el: '#root',    // 第一种写法
+            
+            // data 第一种写法，对象式
+            /*
+              data: {
+                name: "黄米饭"
+              }
+            */
+            
+            // data 第二种写法，函数式。调用组件时，必须使用函数式
+            data:function () {
+                // return 必须返回具体的数据
+                return {
+                    name: "黄米饭"
+                }
+            }
+        })
+        
+        console.log(v);
+        
+        // 使用 Vue 提供的 mount 方法 为 vue实例对象 绑定容器。
+        v.$mount('#root')    // 第二种写法
+    </script>
+</body>
+</html>
