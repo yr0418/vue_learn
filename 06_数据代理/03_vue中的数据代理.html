@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的数据代理</title>
+    <!-- 引入 vue，开发模式-->
+    <script type="text/javascript" src = "../js/vue.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <h1>用户名：{{name}}</h1>
+        <h1>住址：{{address}}</h1>
+    </div>
+    
+    <script type="text/javascript">
+    
+        /**
+         * 1. vm 中上生成针对 data 中各项属性的 set/get 方法够模型使用
+         * 2. vm 中存在一个 _data 对象以保存 data 中的数据
+         */
+        const vm = new Vue ({
+            el: "#root",
+            data: {
+                name: "黄米饭",
+                address: "广西"
+            }
+        })
+    </script>
+
+</body>
+</html>
