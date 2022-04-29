@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的基本使用</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎{{name}}</h2>
+        
+        <!-- v-on：绑定点击事件，执行 showInfo 函数。该函数应该声明在 该容器 绑定的vue实例中 -->
+        <button v-on:click="showInfo1">点我提示信息</button>
+        <button @click = "showInfo1">v-on简写</button>
+        
+        <!--
+            1. $event 在此为鼠标点击事件本身，每次传参时，需带上该事件。若不传递参数，则 event 将作为唯一默认参数进行传递。
+            2. name：data 中的 name 属性值
+        -->
+        <button @click = "showInfo2($event, name)">事件传递参数</button>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                name: "黄米饭"
+            },
+            // 申明方法，方法可接受参数
+            methods: {
+                showInfo1() {
+                    alert("黄米饭你好！")
+                },
+                showInfo2(event, name) {
+                    // event 即鼠标事件本身，每次传参时，需要带上 event
+                    console.log(event)
+                    console.log(name)
+                    alert("黄米饭你好！！")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

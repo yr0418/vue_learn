@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    
+    <style>
+        *{
+            margin-top: 20px;
+        }
+        .demo01{
+            height: 70px;
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        vue 中的事件修饰符
+          1. prevent：阻止默认事件（常用）
+          2. stop：阻止事件冒泡（常用）
+          3. once：事件只触发一次（常用）
+          4. capture：使用事件的捕获模式
+          5. self：只有 event.target 是当前操作的元素时才触发事件
+          6. passive：事件的默行为立即执行，无需等待事件回调执行完毕
+    -->
+    <div id="root">
+        <h2>欢迎{{name}}</h2>
+        
+        <!-- 绑定点击事件，prevent 的使用将阻止 a 标签跳转到指定的连接-->
+        <a href="https//www.atguigu.com" @click.prevent = showInfo1>尚硅谷学习</a>
+        
+        <div class="demo01" @click = "showInfo2($event, name)">
+            
+            <!--
+                阻止点击事件冒泡。
+                注意：
+                  1. 两个 button 均在 demo01 里，对 button 的点击同样是对 div 的点击，将触发 div 绑定的点击事件
+                  2. 点击 button1，其绑定的 showInfo1 正常执行。demo01 绑定的 showInfo2 不会执行。
+                  3. 点击 button2，其绑定的 showInfo3 正常执行，demo01 绑定的 showInfo2 也会执行
+            -->
+            <button id = "button1" @click.stop = showInfo1>点我显示1</button>
+            <button id = "button2" @click = showInfo3>点我显示2</button>
+        </div>
+        
+        <!-- once 的使用会让点击事件只触发一次，后续继续点击将不会执行 showInfo1 -->
+        <button @click.once = showInfo1> 点击只显示一次</button>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                name: "黄米饭"
+            },
+            // 申明方法，方法可接受参数
+            methods: {
+                showInfo1() {
+                    console.log(this)
+                    alert("黄米饭你好！")
+                },
+                showInfo2(event, name) {
+                    // event 即鼠标事件本身，每次传参时，需要带上 event
+                    console.log(event)
+                    console.log(name)
+                    alert("黄米饭你好！！")
+                },
+                showInfo3() {
+                    alert("你好黄米饭")
+                }
+            }
+        })
+    </script>
+</body>
+</html>
