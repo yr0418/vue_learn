@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="../js/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+</head>
+<body>
+    <!--
+        1. Vue 中常用的按键别名：
+            回车：enter
+            删除：delete（捕获 “删除” 和 “退格” 键）
+            空格：space
+            退出：esc
+            换行：tab（要配合 keydown 使用）
+            上：up
+            下：down
+            左：left
+            右：right
+            
+        2. Vue 未提供别名的按键，可以使用按键原始的键名 key 去绑定，但要注意要转换为 kebab-case。例如CapsLK，其键名为：CapsLock，因此绑定时应修改为：caps-lock
+        
+        3. 系统修饰键：ctrl、alt、shift、meta（即win键）
+            （1）配合 keyup 使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才能被触发
+            （2）配合 keydown 使用：正常触发事件
+        
+        4. Vue.config.keyCodes.自定义键名 = 键码。即可定制按键别名，键码即按键编码，keyCode，不推荐
+    -->
+    <div id="root">
+        <h2>欢迎{{name}}</h2>
+        <!--
+            @keyup：绑定键盘按键，注意，按键需抬起来才生效，按住不放不会触发该事件
+            enter：表明绑定的按键是 回车键
+            @keydown：绑定键盘按键，注意，按键按下即可生效
+        -->
+        <input type="text" placeholder="按下回车提示输入" @keyup="showInfo">
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            name: "黄米饭"
+        },
+        methods: {
+            showInfo(e) {
+                /**
+                 * e：若调用 showInfo 时未传入参数，e 指代 调用该函数的事件
+                 * e.target.value：该事件的值，在此表示 input 框中输入的数据
+                 */
+                console.log(e.target.value)
+                console.log(e.key, e.keyCode)
+            }
+        }
+    })
+</script>
+</html>
