@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="../js/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例——插值语法实现</title>
+</head>
+<body>
+    
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+        名：<input type="text" v-model="lastName"> <br/><br/>
+        <!--
+            1. slice：切割函数，只取前三位
+        -->
+        全称：<span>{{firstName.slice(0, 3)}}-{{lastName.slice(0, 3)}}</span>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: "黄",
+            lastName: "米饭",
+        },
+    })
+</script>
+</html>

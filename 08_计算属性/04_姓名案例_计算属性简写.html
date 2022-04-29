@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="../js/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例——计算属性简写</title>
+</head>
+<body>
+    
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+        名：<input type="text" v-model="lastName"> <br/><br/>
+        <!-- fullName：以属性的形式进行调用 -->
+        全称：<span>{{fullName}}</span>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: "黄",
+            lastName: "米饭",
+        },
+        
+        // 计算属性，计算属性与 data 中的属性类似，同样可以被 vm 识别
+        computed: {
+            /*            计算属性完整书写方式
+                          fullName: {
+                            // 初次读取 fullName 时 或 依赖的数据发生变化时，get() 将被执行并更新 fullName 的值。其余时机，fullName 的值将被缓存，读取 fullName 时从缓存中获取而不是重新执行 get 方法。
+                            get() {
+                                console.log("get 被调用")
+                                return this.firstName + "-" + this.lastName
+                            },
+                            // 当 fullName 值被修改时，调用 set 方法。一般来说，计算属性不会被修改
+                            set(value) {
+                                console.log("set", value)
+                                const arr = value.split("-")
+                                this.firstName = arr[0]
+                                this.lastName = arr[1]
+                            }
+                        }*/
+            
+            // 当确定计算属性不会被修改，不需要 set 方式时，可采用简写形式
+            fullName: function () {
+                console.log("访问 fullName")
+                return this.firstName + "-" + this.lastName
+            }
+        },
+        methods: {}
+    })
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="../js/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例——methods 实现</title>
+</head>
+<body>
+    
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+        名：<input type="text" v-model="lastName"> <br/><br/>
+        <!--
+            1. fullName()：将 fullName 函数的返回值 插入到指定的位置
+            2. fullName：将 fullName 函数的函数体 插入到指定的位置
+            3. firstName 和 lastName 一旦有修改，将会重新执行 fullName()
+        -->
+        全称：<span>{{fullName()}}</span>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: "黄",
+            lastName: "米饭",
+        },
+        methods: {
+            fullName() {
+                return this.firstName + "-" + this.lastName
+            }
+        }
+    })
+</script>
+</html>
