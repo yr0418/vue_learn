@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>收集表单数据</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- @submit 绑定表单提交事件，prevent阻止表单提交的默认动作：页面跳走 -->
+        <form @submit.prevent = "demo">
+            <!-- v-model.trim，消除前后空格 -->
+            账号：<input type="text" v-model.trim="user.username"> 
+            <br/><br/>
+            密码：<input type="password" v-model="user.password"> 
+            <br/><br/>
+
+            <!-- v-model 绑定单选框的值，需要手动设置单选框的 value 值 -->
+            性别：
+            男<input type="radio" name="sex" value="男" v-model="user.sex">
+            女<input type="radio" name="sex" value="女" v-model="user.sex"> 
+            <br/><br/>
+
+            <!-- 
+                input 标签的 number 属性，控制输入框只能输入数字。v-model 的 number属性，控制将 输入框中输入的字符串转换成 数字类型。
+                注意：
+                  1. input 框中输入的数据都是 String 类型。
+                  2. v-model.number 针对 "3a0" 这样的输入，将转换成 3，并不会报错
+            -->
+            年龄：<input type="number" v-model.number="user.age">
+
+            <!-- v-model 绑定多选框的值，需要手动配置多选框的 value 值，同时，v-model 绑定的属性的数据类型需要为 数组（例如此处的 hobby 就是数组类型）。否则 v-model 绑定的属性值将变成布尔类型。 -->
+            爱好：
+            学习<input type="checkbox" v-model="user.hobby" value="study">
+            跑步<input type="checkbox" v-model="user.hobby" value="run">
+            美食<input type="checkbox" v-model="user.hobby" value="eat">
+            <br/><br/>
+            所属校区：
+            <select v-model="user.city">
+                <option value="">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzhen">深圳</option>
+                <option value="wuhan">武汉</option>
+            </select>
+            <br/><br/>
+
+            <!-- v-model 的 lazy 属性，当绑定的控件失去焦点时才收集控件中的数据。失去焦点即用户去操作其他控件 -->
+            其他信息：<textarea v-model.lazy="user.remarks"></textarea>
+            <br/><br/>
+
+            <input type="checkbox" v-model="user.agree">阅读并接受<a href="http://www.atguigu.com">《用户协议》</a>
+            <br/><br/>
+
+            <!-- 按钮在表单里面，点击触发表单提交事件 -->
+            <button>提交</button>
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            user: {
+                username: "",
+                password: "",
+                sex: "",
+                age: "",
+                hobby: [],
+                city: "",
+                remarks: "", 
+                agree: ""
+            }
+        },
+
+        methods: {
+            demo() {
+                console.log(this.user)
+            }
+        },
+    })
+</script>
+</html>
