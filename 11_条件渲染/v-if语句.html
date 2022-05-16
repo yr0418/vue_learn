@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if语句</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <h2>显示 n 的值：{{n}}</h2>
+        <button @click="n++">点我 n+1</button>
+        
+        <!--
+            标准的 if、else if、else 语句
+            在解析的时候，这三行语句将视为一个整体。因此，当 n = 1 时，第二个 h2 并不会被显示。同时，这三句话之间不允许插入其他语句，
+            if、else if 或 if、else 同理
+            v-else 即便配置了表达式，表达式也不会生效
+        -->
+        <h2 v-if="n === 1"> n=1</h2>
+        
+        <!-- 添加其他语句后，语句之前的 v-if 正常执行，但是后续的两个判断语句将不会被执行，因为缺少必要的 v-if 语句 -->
+        <!--<h2>打断判断</h2>-->
+        
+        <h2 v-else-if="n <= 2">n = 1</h2>
+        <h2 v-else>n != 1</h2>
+
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            n: 0
+        },
+
+        methods: {
+            test (val) {
+                if (val >= 2) {
+                    return val
+                }
+            }
+        },
+    })
+</script>
+</html>

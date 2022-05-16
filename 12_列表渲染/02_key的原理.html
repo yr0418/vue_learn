@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>key的原理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 
+            key 的绑定
+              1. 当使用 index 绑定 key 的时候，每条 <li> 的数据会跟 index 进行绑定，index 变化时，<li> 中的数据也会被改变。例如 首部添加老刘 实例，在每个输入框中输入数据后，点击按钮新增老刘，原本 张三 这一行的 input 框 中的数据会出现 老刘 这一行后。其他输入框以此类推。这是因为 张三 这一行中，input 绑定的是 index=0。
+              2. 当使用 person.id 绑定 key 的时候，并不会出现上述情况，因为 input 绑定的是 person.id
+         -->
+        <h2>人员列表，遍历数组</h2>
+        <button @click.once = "add">点击在数组首部添加老刘</button>
+        <ul>
+            <li v-for = "person in personList" :key="person.id">
+                {{person.name}} - {{person.age}}
+                <input type="text">
+            </li>
+        </ul>
+        <br/><br/>
+
+        <ul>
+            <li v-for = "(person, index) in personList" :key="index">
+                {{person.name}} - {{person.age}} -- {{index}}
+                <input type="text">
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            personList: [
+                {id: 1, name: "张三", age: 18},
+                {id: 2, name: "李四", age: 19},
+                {id: 3, name: "王五", age: 20}
+            ]
+        },
+
+        methods: {
+            add() {
+                const p = {id: 4, name: "老刘", age: 40}
+                this.personList.unshift(p)
+            }
+        },
+    })
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!--
+            使用 v-show 实现动态显示这个 h2，v-show 需要配置一个返回值为 Boolean 的表达式
+            v-show 只是修改 标签中 style 属性的 display 配置项，h2 这个标签依旧是存在在源码中
+            相比于 v-if，更推荐使用 v-show
+        -->
+        <h2 v-show="false">你好，{{name}}</h2>
+        <!--<h2 v-show="1 === 1">你好，{{name}}</h2>-->
+    
+        <!--
+            使用 v-if 实现动态显示这个 h2，v-if 需要配置一个返回值为 Boolean 的表达式
+            v-if 若配置为 false，h2 这个标签将不存在在源码中
+        -->
+        <h2 v-if="false">你好，{{name}}</h2>
+        <!--<h2 v-if="1 === 1">你好，{{name}}</h2>-->
+        
+        <!--
+            template 和 v-if 的配合使用。使多行标签同时显示 或 同时不显示。且不在源码中显示
+            template 只能和 v-if 进行配合
+        -->
+        <template v-if="n === 1">
+            <h2>你好</h2>
+            <h2>黄米饭</h2>
+            <h2>广西</h2>
+        </template>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            name: "黄米饭"
+        },
+
+    
+    })
+</script>
+</html>

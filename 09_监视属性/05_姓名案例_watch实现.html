@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="../js/vue.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例——watch实现</title>
+</head>
+<body>
+    <!--
+        computed 和 watch 之间的区别：
+          1. computed 能实现的，watch 都能实现
+          2. computed 不能开启异步任务，但是 watch 可以
+          
+        两个重要的原则：
+          1， 所有被 vue 所管理的函数，最好写成普通函数，这样 this 指向的才是 vm 或 组件实例对象。
+          2. 所有不被 vue 所管理的函数（定时器的回调函数，ajax的回调函数等），最好写成箭头函数，这样 this 的指向才是 vm 或 vue组件实例对象
+    -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+        名：<input type="text" v-model="lastName"> <br/><br/>
+        <!-- fullName：以属性的形式进行调用 -->
+        全称：<span>{{fullName}}</span> <br/><br/>
+        延时实现全称：<span>{{fullName2}}</span>
+        
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: "黄",
+            lastName: "米饭",
+            fullName: "黄-米饭",
+            fullName2: "黄-米饭"
+        },
+        
+        // 计算属性，计算属性与 data 中的属性类似，同样可以被 vm 识别
+        computed: {},
+        methods: {},
+    
+        /**
+         * 利用 watch 实现 fullName 的变化
+         * 1. 在常规情况下，实现 fullName，计算属性 比 监视属性 更好用
+         * 2. 如果存在异步任务的需求，例如，实现 fullName2 延时一秒发生变化 则只能用 watch
+         */
+        watch: {
+            firstName: {
+                handler(val) {
+                    this.fullName = val + "-" + this.lastName
+                    // 延时 1s 实现 fullName2 的变化
+                    setTimeout(() => {
+                        this.fullName2 = val + "-" + this.lastName}, 1000
+                    )
+                }
+            },
+            lastName: {
+                handler(val) {
+                    this.fullName = this.firstName + "-" + val
+                    // 延时 1s 实现 fullName2 的变化
+                    setTimeout(() => {
+                        this.fullName2 = this.firstName + "-" + val}, 1000
+                    )
+                }
+            }
+        }
+    })
+</script>
+</html>

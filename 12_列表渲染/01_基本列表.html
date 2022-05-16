@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本列表</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>人员列表，遍历数组</h2>
+        <ul>
+            <!-- v-for 标准 for 循环语句，:key 为每一个 <li> 绑定一个键 -->
+            <li v-for = "person in personList" :key="person.id">
+                {{person.name}} - {{person.age}}
+            </li>
+        </ul>
+        <br/><br/>
+
+        <ul>
+            <!-- v-for 的第二种写法，其中 person 为 personList 数组中的每一条数据，由于 personList 是数组，因此 index 表示该条数据在 personList 中的索引值 -->
+            <li v-for = "(person, index) in personList" :key="index">
+                {{person.name}} - {{person.age}} -- {{index}}
+            </li>
+        </ul>
+        <br/><br/>
+
+        <h2>人员信息，遍历对象</h2>
+        <ul>
+            <!-- v-for 遍历对象，因此，value 是 值，key 是对应的属性 -->
+            <li v-for = "(value, key) in person" :key="key">
+                {{value}} -- {{key}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            personList: [
+                {id: 1, name: "张三", age: 18},
+                {id: 2, name: "李四", age: 19},
+                {id: 3, name: "王五", age: 20}
+            ],
+
+            person: {
+                name: "黄米饭",
+                age: 18,
+                address: "广西"
+            }
+        },
+
+    
+    })
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue数据监测</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>人员列表，遍历数组</h2>
+        <button @click = "updateMei_2">更新马冬梅信息</button>
+        <ul>
+            <li v-for="person in personList" :key="person.id">
+                {{person.name}} - {{person.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            personList: [
+                { id: 1, name: "马冬梅", age: 28, sex: "女" },
+                { id: 2, name: "周冬雨", age: 19, sex: "女" },
+                { id: 3, name: "周杰伦", age: 30, sex: "男" },
+                { id: 4, name: "温兆伦", age: 42, sex: "男" }
+            ],
+        },
+        methods: {
+            // 对于指定对象的属性的修改，Vue 将正常监测到数据变化
+            updateMei_1() {
+                this.personList[0].name = "马老师"
+                this.personList[0].age = 50
+                this.personList[0].sex = "男"
+            },
+
+            /**
+             * 对于数组而言，通过索引直接修改数据，vue 不会监测到数据变化。vue 中对数组的修改只能通过指定的 7 种方法，才能使得 vue 监测到数组数据的变化
+             *  1. push：   末尾添加数据
+             *  2. pop：    删除末尾数据
+             *  3. shift：  删除首部元素
+             *  4. unshift：首部添加元素
+             *  5. splice： 在指定位置 添加/删除 元素
+             *  6. sort：   数组排序
+             *  7. reverse：数组逆序
+             */
+            updateMei_2() {
+                // 未生效
+                this.personList[0] = { id: 1, name: "马老师", age: 50, sex: "男" }
+
+                // 生效
+                this.personList.splice(0, 1, { id: 1, name: "马老师", age: 50, sex: "男" })  
+
+            }
+        },
+    })
+</script>
+
+</html>
