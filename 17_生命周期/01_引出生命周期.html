@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>引出生命周期</title>
+</head>
+<body>
+    <!-- 
+        生命周期：
+          1. 又名：生命周期回调函数、生命周期函数、生命周期钩子
+          2. 是什么：Vue 在关键时间节点帮我们调用的一些特殊名称的函数
+          3. 生命周期函数的名字不可更改，但函数的具体内容是根据具体需求编写的
+          4. 生命周期函数中的 this 是 Vue实例对象 或者 Vue组件实例对象
+     -->
+    <div id="root">
+        <h2 :style="{opacity: opacity}">欢迎来到尚硅谷</h2>
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            opacity: 1,
+        },
+
+        // 生命周期函数，Vue 完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕），调用 mounted
+        mounted() {
+            console.log("mounted")
+            setInterval(() => {
+                this.opacity -= 0.01
+                if (this.opacity <= 0) this.opacity = 1
+            }, 16)
+        },
+    })
+</script>
+</html>
