@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <title>组件嵌套</title>
+</head>
+
+<body>
+  <div id="root">
+    <school></school>
+  </div>
+</body>
+<script type="text/javascript">
+
+  const student = Vue.extend({
+      template: `
+        <div>
+            <h3>学生姓名：{{student.name}}</h3>
+            <h3>学生年龄：{{student.age}}</h3>
+        </div>
+        `,
+      data() {
+        return {
+          student: {
+            name: "黄米饭",
+            age: 18
+          }
+        }
+      },
+    })
+
+  const school = Vue.extend({
+    template: `
+            <div>
+                <h3>学校名称：{{school.name}}</h3>
+                <h3>学校地址：{{school.address}}</h3>
+                <student></student>
+            </div>
+        `,
+
+    data() {
+      return {
+        school: {
+          name: "尚硅谷",
+          address: "北京昌平"
+        }
+      }
+    },
+
+    // 组件嵌套，为此 student 组件需要写在 school 组件 之前
+    components: {
+      student
+    }
+  })
+
+  const hello = Vue.extend({
+      template: `
+      <div>
+        <h2>你好，{{name}}</h2>
+      </div>
+    `,
+
+      data() {
+        return {
+          name: "黄米饭"
+        }
+      }
+    })
+
+  const vm = new Vue({
+    el: "#root",
+
+    components: {
+      school
+    },
+  })
+</script>
+
+</html>

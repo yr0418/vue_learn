@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <title>非单文件组件简单使用</title>
+</head>
+
+<body>
+  <div id="root">
+    <!-- 第三步：编写组件标签，标签名即 在 vm 中注册时编写的 组件名 -->
+    <xuexiao></xuexiao>
+    <hr>
+
+    <!-- 第三步，编写组件标签，标签名即 在 vm 中注册时编写的 组件名 -->
+    <xuesheng></xuesheng>
+    <hello></hello>
+  </div>
+</body>
+<script type="text/javascript">
+
+  // 第一步：创建 vue 组件
+  // vue 组件中，除 el、data 和 vue 实例有所区别外，其他的类似 methods、computed 与 vue 实例的使用方式一致
+  const school = Vue.extend({
+    // 组件中不允许配置 el，因为所有的组件都要被一个 vm 管理，并由 vm 决定服务于哪个容器
+    // el: "#root"
+
+    // 使用 template 定义组件的 html 结构，用于页面展示
+    template: `
+            <div>
+                <h3>学校名称：{{school.name}}</h3>
+                <h3>学校地址：{{school.address}}</h3>
+            </div>
+        `,
+
+    // 创建组件时，data 需要写成函数，而不能直接写成对象
+    data() {
+      return {
+        school: {
+          name: "尚硅谷",
+          address: "北京昌平"
+        }
+      }
+    },
+  })
+
+  // 第一步，创建 vue 组件
+  const student = Vue.extend({
+    template: `
+        <div>
+            <h3>学生姓名：{{student.name}}</h3>
+            <h3>学生年龄：{{student.age}}</h3>
+        </div>
+        `,
+    data() {
+      return {
+        student: {
+          name: "黄米饭",
+          age: 18
+        }
+      }
+    },
+  })
+
+  const hello = Vue.extend({
+    template: `
+      <div>
+        <h2>你好，{{name}}</h2>
+      </div>
+    `,
+
+    data() {
+      return {
+        name: "黄米饭"
+      }
+    }
+  })
+
+  // 第二步：注册组件，全局注册
+  Vue.component("hello", hello)
+
+  const vm = new Vue({
+    el: "#root",
+
+    /**
+     * 第二步，注册组件，局部注册
+     * 在 components 中以 键值对 的形式注册组件。其中 键 为 实际的组件名，在 vm 中定义，值 为组件对象。
+     * 通常 组件名 与 组件对象名 相同，这样可以使用 简写形式，即只写 组件名 即可
+     *   示例：school: school ====> school 
+     */
+    components: {
+      // 第一个 xuexiao 表示 vm 中定义的组件名，第二个 school 表示 利用 const school = Vue.extend() 创建的组件对象
+      xuexiao: school,
+      xuesheng: student
+    }
+  })
+</script>
+
+</html>
