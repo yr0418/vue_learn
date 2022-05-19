@@ -2,12 +2,19 @@
 <html lang="">
   <head>
     <meta charset="utf-8">
+
+    <!-- 针对 IE 浏览器的特殊配置，让 IE 浏览器以最高形式渲染页面 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- BSAE_URL，路径，即 public 文件夹 -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+
+    <!-- 配置页面标题，标题来自 package.json 中的 name 属性 -->
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <!-- 当浏览器不支持 js 时，<noscript> 中的元素就会被渲染 -->
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
