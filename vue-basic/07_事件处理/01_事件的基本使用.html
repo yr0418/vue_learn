@@ -34,8 +34,9 @@
                     alert("黄米饭你好！")
                 },
                 showInfo2(event, name) {
-                    // event 即鼠标事件本身，每次传参时，需要带上 event
-                    console.log(event)
+                    // event，事件对象，这里是鼠标点击事件，每次传参时，需要带上 event
+                    // event.target，发生事件的标签
+                    console.log(event.target)
                     console.log(name)
                     alert("黄米饭你好！！")
                 }
